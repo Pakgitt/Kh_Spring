@@ -1,6 +1,8 @@
 *.metadata/
 bin/
 build/
+keyproperties/
+#*.properties
 keyfiles/
 *./properties
 
