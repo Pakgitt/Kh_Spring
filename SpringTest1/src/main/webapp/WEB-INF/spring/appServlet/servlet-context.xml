@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -23,18 +27,19 @@
 	
 	<!-- service에 어노테이션 안해도 됨 -->
 	
-	<!-- 
 	<beans:bean id="testDto" class="kh.mclass.test1.sub.model.dto.TestDto">
+	
+		<!--  
 		<beans:property name="a1" value="생셩시 값 1"></beans:property>
 		<beans:property name="a2" value="생셩시 값 2"></beans:property>
-		 -->
-		<!--  
+		
 		<beans:constructor-arg index="0" value="첫 값 1"></beans:constructor-arg>
 		<beans:constructor-arg index="1" value="첫 값 2"></beans:constructor-arg>
 		 -->
-		<!--  
+		 <!-- 
 		<beans:constructor-arg name="a1" value="첫 값 1"></beans:constructor-arg>
 		<beans:constructor-arg name="a2" value="첫 값 2"></beans:constructor-arg>
+		 -->
 		 <beans:property name="a1" value="생셩시 값 1"></beans:property>
 		<beans:property name="a2" value="생셩시 값 2"></beans:property>
 		<beans:property name="testFileDto" ref="testFileDto"></beans:property>
@@ -45,7 +50,6 @@
 		<beans:constructor-arg name="filePath" value="aaa.jpg"></beans:constructor-arg>
 		<beans:constructor-arg name="fileType" value="jpg"></beans:constructor-arg>
 	</beans:bean>
-		 -->
 		 
 
 	<beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -63,5 +67,18 @@
 	
 	<beans:bean class="kh.mclass.test1.sub.TestController" id="testController"></beans:bean>
 	
-	<context:component-scan base-package="kh.mclass.test1" />
+	<context:component-scan base-package="kh.mclass.test1">
+	<!-- 
+		<context:include-filter type="annotation" expression=""/> 포함 시킬거
+		<context:exclude-filter type="annotation" expression=""/> 포함 안시킬거
+		 --> 
+	</context:component-scan>	
+	<!-- 방법 1 @Aspect AOP annotation 인식함 -->
+<!-- 
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+ -->	
+	<!-- 방법 2 -->
+	<!-- 
+	<beans:bean class=""></beans:bean>
+	 -->
 </beans:beans>

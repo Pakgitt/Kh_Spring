@@ -29,8 +29,8 @@ public class TestController {
 //	Component 이름으로 Autowired 첫글자 소문자 
 	private TestService testService;
 //	@RequestMapping (method = RequestMethod.GET, path = "/test")
+//	@Qualifier(value = "testDto")
 	@Autowired
-//	@Qualifier
 	private TestDto testDto;
 	@GetMapping ("/test")
 	public String method1(
