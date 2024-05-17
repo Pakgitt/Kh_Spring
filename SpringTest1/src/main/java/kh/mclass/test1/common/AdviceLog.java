@@ -1,8 +1,10 @@
 package kh.mclass.test1.common;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +15,6 @@ import org.springframework.util.StopWatch;
 @Component
 public class AdviceLog {
 	private Logger logger = LoggerFactory.getLogger(AdviceLog.class);
-	
 	@Pointcut("execution(public * kh..*Dao.*(..))")
 	public void daoPointcut() {}
 	
@@ -22,7 +23,7 @@ public class AdviceLog {
 	
 	@Pointcut("execution(public * kh..*Controller.*(..))")
 	public void controllerPointcut() {}
-
+	
 	@Around("daoPointcut()")
 	public Object aroundDaoLog(ProceedingJoinPoint pjp) throws Throwable {
 		Object returnObj = null;
@@ -63,5 +64,16 @@ public class AdviceLog {
 		return returnObj;
 	}
 	
+	@Before("controllerPointcut()")
+	public void bctrlLog(JoinPoint jp) {
+		// jp.getThis() : 클래스명
+		// jp.getSignature().getName(): 타겟메소드명
+		logger.debug("▷▷▷["+jp.getThis()+":"+jp.getSignature().getName()+"]");
+		jp.getArgs();
+		Object[] args = jp.getArgs();
+		for(int i=0; i<args.length; i++) {
+			logger.debug("▷-args["+i+"] "+args[i]+"");
+		}
+	}
 	
 }

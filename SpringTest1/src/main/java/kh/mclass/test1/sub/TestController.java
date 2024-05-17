@@ -28,6 +28,13 @@ public class TestController {
 	@Autowired
 //	Component 이름으로 Autowired 첫글자 소문자 
 	private TestService testService;
+	
+	@GetMapping("/login")
+	public String login() {
+		
+		return "home";
+	}
+	
 //	@RequestMapping (method = RequestMethod.GET, path = "/test")
 //	@Qualifier(value = "testDto")
 	@Autowired

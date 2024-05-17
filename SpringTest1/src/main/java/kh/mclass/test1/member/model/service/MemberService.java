@@ -15,15 +15,16 @@ import kh.mclass.test1.member.model.dto.MemberRes;
 public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
+
 	// @Transactional
-	public List<MemberRes> selectList(){
+	public List<MemberRes> selectList() {
 		memberDao.insert();
 		memberDao.update();
-		
+
 		return memberDao.selectList();
 	}
-	
-	public void insertAbc() {
-		
+
+	public MemberRes selectOne(String memId) {
+		return memberDao.selectOne(memId);
 	}
 }

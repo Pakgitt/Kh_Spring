@@ -60,7 +60,7 @@
 		 			
 		 		</beans:prop>
 		 		<beans:prop key="/bbb">값2</beans:prop>
-		S 	</beans:props>
+		 	</beans:props>
 		 </beans:property>
 	 -->	 
 	</beans:bean>
@@ -74,11 +74,22 @@
 		 --> 
 	</context:component-scan>	
 	<!-- 방법 1 @Aspect AOP annotation 인식함 -->
-<!-- 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
- -->	
 	<!-- 방법 2 -->
 	<!-- 
 	<beans:bean class=""></beans:bean>
 	 -->
+	 
+	 <beans:bean class="kh.mclass.test1.common.LoginInterceptor" id="loginInterceptor"/>
+	 <interceptors>
+	 	<interceptor>
+	 		<mapping path="/**"/>
+	 		<exclude-mapping path="/login"/>
+	 		<exclude-mapping path="/join"/>
+	 		<exclude-mapping path="/main"/>
+	 		<exclude-mapping path="/resources/**"/>
+	 		<beans:ref bean="loginInterceptor"/>
+	 	</interceptor>
+	 </interceptors>
+	 
 </beans:beans>

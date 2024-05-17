@@ -19,6 +19,7 @@ public class MemberDao {
 	}
 
 	public MemberRes selectOne(String memId) {
+		
 		return sqlSession.selectOne("Member.one", memId);
 	}
 	
